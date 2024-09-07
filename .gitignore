@@ -161,3 +161,5 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+./local/k6/report
+!examples/.env.example
