@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS "table"
+(
+    id          BIGSERIAL PRIMARY KEY,
+    created_at  TIMESTAMPTZ DEFAULT NOW(),
+    modified_at TIMESTAMPTZ DEFAULT NOW(),
+    deleted_at  TIMESTAMPTZ DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "item"
+(
+    id          BIGSERIAL PRIMARY KEY,
+    created_at  TIMESTAMPTZ DEFAULT NOW(),
+    modified_at TIMESTAMPTZ DEFAULT NOW(),
+    deleted_at  TIMESTAMPTZ DEFAULT NULL
+);
