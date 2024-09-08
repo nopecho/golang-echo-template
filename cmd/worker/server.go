@@ -10,7 +10,7 @@ import (
 func main() {
 	go scheduling()
 	e := echoserver.NewEcho()
-	echoserver.Run(e, config.EnvConfig.Port)
+	echoserver.Run(e, config.Env.Port)
 }
 
 func scheduling() {

@@ -13,19 +13,19 @@ type PostgresConfig struct {
 	Password string
 }
 
-type Config struct {
+type EnvConfig struct {
 	Postgres *PostgresConfig
 	Port     string
 }
 
-var EnvConfig *Config
+var Env *EnvConfig
 
 func init() {
 	_ = godotenv.Load()
 	postgres := initPostgresConfig()
 	port := getOrDefaultEnv("PORT", "10000")
 
-	EnvConfig = &Config{
+	Env = &EnvConfig{
 		Postgres: postgres,
 		Port:     port,
 	}

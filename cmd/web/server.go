@@ -13,5 +13,5 @@ func main() {
 	domainHandler := v1.NewDomainHandler(apiV1, nil)
 	domainHandler.Routing()
 
-	echoserver.Run(e, config.EnvConfig.Port)
+	echoserver.Run(e, config.Env.Port)
 }
