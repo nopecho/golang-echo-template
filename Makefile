@@ -70,7 +70,7 @@ docker:
 ifdef module
 ifdef tag
 	docker build \
-	-f $(BUILD_PATH)/$(module)/Dockerfile \
+	-f build/Dockerfile \
 	-t $(tag) \
 	--build-arg BUILD_PATH=$(BUILD_PATH)/$(module)/server.go \
 	.
