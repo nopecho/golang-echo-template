@@ -1,21 +1,21 @@
 package main
 
 import (
-	"fmt"
 	"github.com/nopecho/golang-template/internal/app/config"
-	"net/http"
+	"github.com/nopecho/golang-template/pkg/echoserver"
+	"github.com/rs/zerolog/log"
+	"time"
 )
 
 func main() {
-	mux := http.NewServeMux()
+	go scheduling()
+	e := echoserver.NewEcho()
+	echoserver.Run(e, config.EnvConfig.Port)
+}
 
-	mux.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("pong"))
-	})
-
-	mux.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("world"))
-	})
-
-	http.ListenAndServe(fmt.Sprintf(":%d", config.EnvConfig.Port), mux)
+func scheduling() {
+	ticker := time.NewTicker(1 * time.Second)
+	for t := range ticker.C {
+		log.Info().Msgf("Tick: %v", t)
+	}
 }

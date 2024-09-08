@@ -1,15 +1,17 @@
 package main
 
 import (
+	"github.com/nopecho/golang-template/internal/app/api/v1"
 	"github.com/nopecho/golang-template/internal/app/config"
-	"github.com/nopecho/golang-template/pkg/bootstrap/http"
+	"github.com/nopecho/golang-template/pkg/echoserver"
 )
 
 func main() {
-	c := config.EnvConfig
-	server := http.NewHttpServer(&http.Option{
-		Port:    c.Port,
-		Handler: http.NewCompositeHandler(),
-	})
-	server.Run()
+	e := echoserver.NewEcho()
+
+	apiV1 := echoserver.Version(e, 1)
+	domainHandler := v1.NewDomainHandler(apiV1, nil)
+	domainHandler.Routing()
+
+	echoserver.Run(e, config.EnvConfig.Port)
 }

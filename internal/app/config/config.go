@@ -3,7 +3,6 @@ package config
 import (
 	"github.com/joho/godotenv"
 	"os"
-	"strconv"
 )
 
 type PostgresConfig struct {
@@ -16,7 +15,7 @@ type PostgresConfig struct {
 
 type Config struct {
 	Postgres *PostgresConfig
-	Port     int
+	Port     string
 }
 
 var EnvConfig *Config
@@ -24,21 +23,12 @@ var EnvConfig *Config
 func init() {
 	_ = godotenv.Load()
 	postgres := initPostgresConfig()
-	port := initOrDefaultPort(10000)
+	port := getOrDefaultEnv("PORT", "10000")
 
 	EnvConfig = &Config{
 		Postgres: postgres,
 		Port:     port,
 	}
-}
-
-func initOrDefaultPort(defaultValue int) int {
-	strPort := getOrDefaultEnv("PORT", "10000")
-	port, err := strconv.Atoi(strPort)
-	if err != nil {
-		port = defaultValue
-	}
-	return port
 }
 
 func initPostgresConfig() *PostgresConfig {
