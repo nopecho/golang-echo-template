@@ -6,6 +6,7 @@ import (
 
 type ChannelManager[T any] struct {
 	Channel chan T
+	Size    int
 	wg      *sync.WaitGroup
 }
 
@@ -15,6 +16,7 @@ func OpenBufferChannel[T any](size int) *ChannelManager[T] {
 	wg.Add(size)
 	cm := &ChannelManager[T]{
 		Channel: ch,
+		Size:    size,
 		wg:      &wg,
 	}
 	go cm.close()
@@ -26,7 +28,7 @@ func (cm *ChannelManager[T]) Send(v T) {
 	cm.Channel <- v
 }
 
-func (cm *ChannelManager[T]) ReceiveWait() []T {
+func (cm *ChannelManager[T]) WaitReceive() []T {
 	var result []T
 	for v := range cm.Channel {
 		result = append(result, v)

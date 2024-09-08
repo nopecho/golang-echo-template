@@ -7,10 +7,6 @@ import (
 	"testing"
 )
 
-func init() {
-	setupTestLog()
-}
-
 type TestService interface {
 	DoSomething(input interface{}) (interface{}, error)
 }

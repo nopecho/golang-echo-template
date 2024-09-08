@@ -24,7 +24,7 @@ func (suite *ChannelManagerTestSuite) TestSend() {
 	for i := range size {
 		go cm.Send(strconv.Itoa(i))
 	}
-	actual := cm.ReceiveWait()
+	actual := cm.WaitReceive()
 
 	suite.Len(actual, size)
 }

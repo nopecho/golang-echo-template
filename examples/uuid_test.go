@@ -20,7 +20,7 @@ func Benchmark(b *testing.B) {
 					cm.Send(v7.String())
 				}()
 			}
-			result := cm.ReceiveWait()
+			result := cm.WaitReceive()
 
 			assert.Len(b, result, size)
 		}
@@ -37,7 +37,7 @@ func Benchmark(b *testing.B) {
 					cm.Send(id)
 				}()
 			}
-			result := cm.ReceiveWait()
+			result := cm.WaitReceive()
 
 			assert.Len(b, result, size)
 		}
