@@ -110,10 +110,6 @@ func (suite *GoFunkTestSuite) Test() {
 	suite.Equal(3, len(suite.items))
 }
 
-func init() {
-	setupTestLog()
-}
-
 type TestStruct struct {
 	Str     string
 	Number  int

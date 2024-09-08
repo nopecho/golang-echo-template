@@ -1,14 +1,15 @@
-package examples
+package config
 
 import (
+	"github.com/nopecho/golang-template/internal/pkg/dayte"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"os"
 )
 
-func setupTestLog() {
+func PrettyLogging() {
 	log.Logger = log.Output(zerolog.ConsoleWriter{
 		Out:        os.Stdout,
-		TimeFormat: "2006-01-02T15:04:05.000",
+		TimeFormat: dayte.DateTime,
 	})
 }
