@@ -8,17 +8,7 @@ import (
 	"net/http"
 )
 
-type Map map[string]any
-
 type CsvData [][]string
-
-func DefaultQueryParam(c echo.Context, key string, defaultValue string) string {
-	value := c.QueryParam(key)
-	if value == "" {
-		return defaultValue
-	}
-	return value
-}
 
 func CsvResponse(c echo.Context, name string, data CsvData) error {
 	disposition := fmt.Sprintf("attachment; filename=%s.csv", name)

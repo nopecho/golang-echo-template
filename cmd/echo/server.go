@@ -16,8 +16,8 @@ func main() {
 	e := echoserver.NewEcho()
 
 	e.GET("goroutine", func(c echo.Context) error {
-		format := echoserver.DefaultQueryParam(c, "format", "json")
-		sizeParam := echoserver.DefaultQueryParam(c, "size", "1000")
+		format := echoserver.DefaultQuery(c, "format", "json")
+		sizeParam := echoserver.DefaultQuery(c, "size", "1000")
 		size, _ := strconv.Atoi(sizeParam)
 
 		cm := synk.OpenBufferChannel[string](size)

@@ -6,14 +6,13 @@ import (
 	"fmt"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/nopecho/golang-template/pkg/echoserver/e"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
 )
-
-const ApiPrefix = "/api"
 
 func NewEcho() (e *echo.Echo) {
 	e = echo.New()
@@ -22,11 +21,7 @@ func NewEcho() (e *echo.Echo) {
 	return e
 }
 
-func Version(e *echo.Echo, version int) (g *echo.Group) {
-	group := fmt.Sprintf("%s/v%d", ApiPrefix, version)
-	return e.Group(group)
-}
-
+// Run starts the echo server with graceful shutdown
 func Run(e *echo.Echo, port string) {
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, os.Kill, syscall.SIGTERM)
 	defer stop()
@@ -58,7 +53,7 @@ func defaultMiddleware(e *echo.Echo) {
 }
 
 func healthHandler(c echo.Context) error {
-	return c.JSON(http.StatusOK, Map{
+	return c.JSON(http.StatusOK, e.Map{
 		"status": "ok",
 	})
 }
