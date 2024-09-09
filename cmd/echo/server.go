@@ -5,6 +5,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/nopecho/golang-template/internal/app/config"
 	"github.com/nopecho/golang-template/pkg/echoserver"
+	e2 "github.com/nopecho/golang-template/pkg/echoserver/e"
 	"github.com/nopecho/golang-template/pkg/synk"
 	"math/rand"
 	"net/http"
@@ -43,7 +44,7 @@ func main() {
 			}
 			return echoserver.CsvResponse(c, "goroutine", data)
 		default:
-			return c.JSON(http.StatusBadRequest, echoserver.Map{
+			return c.JSON(http.StatusBadRequest, e2.Map{
 				"error": "invalid format",
 			})
 		}
