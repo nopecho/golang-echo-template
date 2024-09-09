@@ -4,6 +4,12 @@ BUILD_PATH := cmd
 K6_SCRIPT_PATH := $(CURDIR)/local/k6/script
 K6_REPORT_PATH := $(CURDIR)/local/k6/report
 
+asdf:
+	@asdf install && \
+	while read -r tool version; do \
+		asdf local $$tool $$version; \
+	done < ./.tool-versions
+
 .PHONY: k6-init
 k6-init:
 ifdef name
