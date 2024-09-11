@@ -5,6 +5,6 @@ type DomainCreateCommand struct {
 }
 
 type DomainUpdateCommand struct {
-	ID   int64
+	ID   uint64
 	Name string
 }

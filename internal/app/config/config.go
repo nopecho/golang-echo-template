@@ -2,19 +2,12 @@ package config
 
 import (
 	"github.com/joho/godotenv"
+	"github.com/nopecho/golang-template/internal/app/infra/database"
 	"os"
 )
 
-type PostgresConfig struct {
-	Host     string
-	Port     string
-	Database string
-	Username string
-	Password string
-}
-
 type EnvConfig struct {
-	Postgres *PostgresConfig
+	Postgres *database.ConnectionInfo
 	Port     string
 }
 
@@ -22,27 +15,19 @@ var Env *EnvConfig
 
 func init() {
 	_ = godotenv.Load()
-	postgres := initPostgresConfig()
-	port := getOrDefaultEnv("PORT", "10000")
-
 	Env = &EnvConfig{
-		Postgres: postgres,
-		Port:     port,
+		Port: GetDefaultEnv("PORT", "10000"),
+		Postgres: &database.ConnectionInfo{
+			Host:     GetDefaultEnv("POSTGRES_HOST", "localhost"),
+			Port:     GetDefaultEnv("POSTGRES_PORT", "5454"),
+			Database: GetDefaultEnv("POSTGRES_DATABASE", "local"),
+			Username: GetDefaultEnv("POSTGRES_USERNAME", "local"),
+			Password: GetDefaultEnv("POSTGRES_PASSWORD", "local"),
+		},
 	}
 }
 
-func initPostgresConfig() *PostgresConfig {
-	postgres := &PostgresConfig{
-		Host:     getOrDefaultEnv("POSTGRES_HOST", "localhost"),
-		Port:     getOrDefaultEnv("POSTGRES_PORT", "5432"),
-		Database: getOrDefaultEnv("POSTGRES_DATABASE", "postgres"),
-		Username: getOrDefaultEnv("POSTGRES_USERNAME", "postgres"),
-		Password: getOrDefaultEnv("POSTGRES_PASSWORD", "postgres"),
-	}
-	return postgres
-}
-
-func getOrDefaultEnv(key, defaultValue string) string {
+func GetDefaultEnv(key, defaultValue string) string {
 	if value, ok := os.LookupEnv(key); ok {
 		return value
 	}

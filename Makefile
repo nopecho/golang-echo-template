@@ -1,8 +1,10 @@
 LOCAL_GOARCH := arm64
 LOCAL_GOOS := darwin
 BUILD_PATH := cmd
-K6_SCRIPT_PATH := $(CURDIR)/local/k6/script
-K6_REPORT_PATH := $(CURDIR)/local/k6/report
+LOCAL_INFRA_PATH := $(CURDIR)/local
+LOCAL_DOCKER_COMPOSE := $(LOCAL_INFRA_PATH)/docker-compose.yml
+K6_SCRIPT_PATH := $(LOCAL_INFRA_PATH)/k6/script
+K6_REPORT_PATH := $(LOCAL_INFRA_PATH)/k6/report
 
 asdf:
 	@asdf install && \

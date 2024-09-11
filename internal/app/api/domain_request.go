@@ -1,7 +1,7 @@
 package api
 
 type GetParams struct {
-	ID int64 `param:"id"`
+	ID uint64 `param:"id"`
 }
 
 type MetaQuery struct {
@@ -14,6 +14,6 @@ type CreateRequest struct {
 }
 
 type UpdateRequest struct {
-	ID   int64  `param:"id"`
+	ID   uint64 `param:"id"`
 	Name string `json:"name"`
 }

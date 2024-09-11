@@ -18,7 +18,7 @@ func NewDomainService(repository domain.Repository, client *clinet.Client) *Doma
 	}
 }
 
-func (s *DomainService) GetById(id int64) (*domain.Domain, error) {
+func (s *DomainService) GetById(id uint64) (*domain.Domain, error) {
 	return s.repository.FindById(id)
 }
 

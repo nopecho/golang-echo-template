@@ -11,7 +11,7 @@ type EnvConfigTestSuite struct {
 }
 
 func (suite *EnvConfigTestSuite) TestGetOrDefaultEnv() {
-	actual := getOrDefaultEnv("TEST_PORT", "10000")
+	actual := GetDefaultEnv("TEST_PORT", "10000")
 
 	suite.Equal("10000", actual)
 }
@@ -20,7 +20,7 @@ func (suite *EnvConfigTestSuite) TestGetEnv() {
 	_ = os.Setenv("TEST_PORT", "20000")
 	defer os.Unsetenv("TEST_PORT")
 
-	actual := getOrDefaultEnv("TEST_PORT", "10000")
+	actual := GetDefaultEnv("TEST_PORT", "10000")
 
 	suite.Equal("20000", actual)
 }
