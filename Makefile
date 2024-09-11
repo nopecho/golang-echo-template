@@ -91,7 +91,7 @@ else
 	@exit 1
 endif
 
-run:
+run: up
 ifdef module
 	go run $(BUILD_PATH)/$(module)/server.go
 else

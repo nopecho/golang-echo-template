@@ -35,8 +35,15 @@ func (h *Handler) Register(gr ...GroupRouter) {
 }
 
 func (h *Handler) Route(e *echo.Echo) {
-	version := e.Group(fmt.Sprintf("%s/%s", prefix, h.Version))
+	group := e.Group(h.versioning())
 	for _, vr := range h.Routers {
-		vr.route(version)
+		vr.route(group)
 	}
+}
+
+func (h *Handler) versioning() string {
+	if h.Version == "" {
+		return ""
+	}
+	return fmt.Sprintf("%s/%s", prefix, h.Version)
 }

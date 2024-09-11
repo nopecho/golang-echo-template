@@ -16,6 +16,7 @@ var (
 
 func init() {
 	db = datasource.NewPostgres(config.Env.Postgres.DSN(), datasource.DefaultConnPool())
+	db.AutoMigrate(&database.DomainEntity{}, &database.Domain2Entity{})
 }
 
 func main() {
@@ -26,7 +27,11 @@ func main() {
 	service := svc.NewDomainService(repository, nil)
 	router := api.NewDomainRouter(service)
 
-	handler.Register(router, router, router)
+	handler.Register(router, router, router, router)
 	handler.Route(server)
+
+	handler2 := api.NewHandler("")
+	handler2.Register(router)
+	handler2.Route(server)
 	echoserver.Run(server, config.Env.Port)
 }
