@@ -67,7 +67,7 @@ ifdef module
 	CGO_ENABLED=0 \
 	GOOS=$(LOCAL_GOOS) \
 	GOARCH=$(LOCAL_GOARCH) \
-	go build -o server $(BUILD_PATH)/$(module)/server.go
+	go build -o server $(BUILD_PATH)/$(module)/main.go
 else
 	@echo "Usage: make build module=<module name>"
 	@exit 1
@@ -80,7 +80,8 @@ ifdef tag
 	docker build \
 	-f build/Dockerfile \
 	-t $(tag) \
-	--build-arg BUILD_PATH=$(BUILD_PATH)/$(module)/server.go \
+	--build-arg BUILD_PATH=$(BUILD_PATH)/$(module)/main.go \
+	--build-arg APP_NAME=$(module) \
 	.
 else
 	@echo "Usage: make docker module=<module name> tag=<tag name>"
@@ -93,8 +94,8 @@ endif
 
 run: up
 ifdef module
-	go run $(BUILD_PATH)/$(module)/server.go
+	go run $(BUILD_PATH)/$(module)/main.go
 else
 	@echo "Usage: make run module=<module name>! starting default web server"
-	go run $(BUILD_PATH)/web/server.go
+	go run $(BUILD_PATH)/web/main.go
 endif
