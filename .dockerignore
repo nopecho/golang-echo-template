@@ -161,5 +161,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-local/**
+# develop dir
 examples
+local
+test
