@@ -17,7 +17,7 @@ ARG APP_PATH=/app
 ARG RUN_PATH=$APP_PATH/$APP_NAME
 
 ENV APP_NAME=$APP_NAME \
-    RUN_PATH=$RUN_PATH \
+    RUN_PATH=$RUN_PATH
 
 RUN apk --no-cache add tzdata && \
     apk --no-cache add ca-certificates
