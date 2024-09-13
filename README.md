@@ -1,6 +1,6 @@
-# Go Server Template
+# Go Template
 
-![Go](https://golang.org/doc/gopher/frontpage.png)
+<img alt="Go" height="" src="https://go.dev/doc/gopher/gopherbw.png" width="300"/>
 
 ## Introduction
 Go 서버 애플리케이션 개발 시 사용할 수 있는 [echo](https://echo.labstack.com/) 프레임워크 기반 템플릿 프로젝트 입니다.
