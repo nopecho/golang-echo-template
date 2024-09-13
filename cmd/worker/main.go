@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/nopecho/golang-template/internal/app/config"
+	"github.com/nopecho/golang-template/internal/pkg/helper"
 	"github.com/nopecho/golang-template/pkg/echoserver"
 	"github.com/rs/zerolog/log"
 	"time"
@@ -10,7 +10,7 @@ import (
 func main() {
 	go scheduling()
 	e := echoserver.NewEcho()
-	echoserver.Run(e, config.Env.Port)
+	echoserver.Run(e, helper.EnvPort())
 }
 
 func scheduling() {

@@ -1,7 +1,7 @@
 package e2e
 
 import (
-	"encoding/json"
+	"github.com/goccy/go-json"
 	"github.com/nopecho/golang-template/internal/app/infra/database"
 	"github.com/nopecho/golang-template/pkg/gorm/datasource"
 	"github.com/nopecho/golang-template/test"

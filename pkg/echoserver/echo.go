@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/nopecho/golang-template/pkg/echoserver/e"
+	"github.com/rs/zerolog/log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -17,6 +17,7 @@ import (
 func NewEcho() (e *echo.Echo) {
 	e = echo.New()
 	defaultMiddleware(e)
+	e.GET("/", rootHandler)
 	e.GET("/health", healthHandler)
 	return e
 }
@@ -48,12 +49,41 @@ func stopServer(e *echo.Echo) {
 }
 
 func defaultMiddleware(e *echo.Echo) {
-	e.Use(middleware.Logger())
+	e.Use(middleware.RequestLoggerWithConfig(middleware.RequestLoggerConfig{
+		Skipper:     defaultSkipper(),
+		LogMethod:   true,
+		LogURI:      true,
+		LogStatus:   true,
+		LogRemoteIP: true,
+		LogLatency:  true,
+		LogValuesFunc: func(c echo.Context, v middleware.RequestLoggerValues) error {
+			log.Info().
+				Str("method", v.Method).
+				Str("uri", v.URI).
+				Int("status", v.Status).
+				Str("remote_ip", v.RemoteIP).
+				Str("latency", v.Latency.String()).
+				Msg("api request")
+			return nil
+		},
+	}))
+
 	e.Use(middleware.Recover())
 }
 
 func healthHandler(c echo.Context) error {
-	return c.JSON(http.StatusOK, e.Map{
+	return c.JSON(http.StatusOK, ANY{
 		"status": "ok",
 	})
+}
+
+func rootHandler(c echo.Context) error {
+	return c.JSON(http.StatusNoContent, nil)
+}
+
+func defaultSkipper() middleware.Skipper {
+	return func(c echo.Context) bool {
+		path := c.Path()
+		return path == "/" || path == "/health"
+	}
 }

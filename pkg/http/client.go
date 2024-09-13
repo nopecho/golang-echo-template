@@ -2,7 +2,7 @@ package http
 
 import (
 	"bytes"
-	"encoding/json"
+	"github.com/goccy/go-json"
 	"github.com/rs/zerolog/log"
 	"io"
 	"net"

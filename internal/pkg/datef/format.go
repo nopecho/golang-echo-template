@@ -1,4 +1,4 @@
-package dayte
+package datef
 
 const (
 	Date         = "2006-01-02"
