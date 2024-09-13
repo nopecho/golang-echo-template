@@ -32,6 +32,7 @@ func EnvConnectionInfo() *ConnectionInfo {
 	}
 }
 
+// DSN returns the data source name for the connection
 func (c *ConnectionInfo) DSN() string {
 	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s", c.host, c.username, c.password, c.database, c.port)
 }

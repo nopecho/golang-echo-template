@@ -9,6 +9,10 @@ type DomainEntity struct {
 	BaseModel
 }
 
+func (DomainEntity) TableName() string {
+	return "domain"
+}
+
 func (e *DomainEntity) Domain() *domain.Domain {
 	return &domain.Domain{
 		ID:   e.ID,

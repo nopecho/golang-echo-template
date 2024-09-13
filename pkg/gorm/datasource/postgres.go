@@ -44,6 +44,9 @@ func NewPostgres(dsn string, pool *ConnectionPool) *gorm.DB {
 	if err != nil {
 		log.Fatal().Msgf("postgresql is not connected. %v", err)
 	}
+	if pool == nil {
+		pool = DefaultConnPool()
+	}
 	if pool.ConnMaxLifetime <= 0 {
 		pool.ConnMaxLifetime = time.Hour
 	}
