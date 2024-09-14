@@ -2,18 +2,18 @@ package helper
 
 import (
 	"fmt"
-	"github.com/nopecho/golang-template/internal/pkg/datef"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 func PrettyLogging() {
 	log.Logger = log.Output(zerolog.ConsoleWriter{
 		Out:        os.Stdout,
-		TimeFormat: datef.DateTime,
+		TimeFormat: time.RFC3339,
 		NoColor:    true,
 		FormatLevel: func(i interface{}) string {
 			return strings.ToUpper(fmt.Sprintf("%s", i))
