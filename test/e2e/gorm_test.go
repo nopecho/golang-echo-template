@@ -3,8 +3,8 @@ package e2e
 import (
 	"github.com/goccy/go-json"
 	"github.com/nopecho/golang-template/internal/app/infra/database"
-	"github.com/nopecho/golang-template/pkg/gorm/datasource"
-	"github.com/nopecho/golang-template/test"
+	"github.com/nopecho/golang-template/internal/pkg/gorm/datasource"
+	"github.com/nopecho/golang-template/test/testcontainer"
 	"github.com/stretchr/testify/assert"
 	"gorm.io/gorm"
 	"slices"
@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	container1 = test.NewPostgresContainer()
-	container2 = test.NewPostgresContainer()
+	container1 = testcontainer.NewPostgresContainer()
+	container2 = testcontainer.NewPostgresContainer()
 	db1        = datasource.NewPostgres(container1.DSN, datasource.DefaultConnPool())
 	db2        = datasource.NewPostgres(container2.DSN, datasource.DefaultConnPool())
 )

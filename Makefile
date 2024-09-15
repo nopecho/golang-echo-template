@@ -78,7 +78,6 @@ docker:
 ifdef module
 ifdef tag
 	docker build \
-	-f build/Dockerfile \
 	-t $(tag) \
 	--build-arg BUILD_PATH=$(BUILD_PATH)/$(module)/main.go \
 	--build-arg APP_NAME=$(module) \

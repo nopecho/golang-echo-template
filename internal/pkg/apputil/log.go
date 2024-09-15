@@ -1,4 +1,4 @@
-package helper
+package apputil
 
 import (
 	"fmt"
@@ -13,7 +13,7 @@ import (
 func PrettyLogging() {
 	log.Logger = log.Output(zerolog.ConsoleWriter{
 		Out:        os.Stdout,
-		TimeFormat: time.RFC3339,
+		TimeFormat: time.RFC3339Nano,
 		NoColor:    true,
 		FormatLevel: func(i interface{}) string {
 			return strings.ToUpper(fmt.Sprintf("%s", i))

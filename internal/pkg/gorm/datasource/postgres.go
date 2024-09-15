@@ -9,18 +9,8 @@ import (
 	"time"
 )
 
-type ConnectionPool struct {
-	MaxIdleConns    int
-	MaxOpenConns    int
-	ConnMaxLifetime time.Duration
-}
-
-func DefaultConnPool() *ConnectionPool {
-	return &ConnectionPool{
-		MaxIdleConns:    10,
-		MaxOpenConns:    20,
-		ConnMaxLifetime: time.Hour,
-	}
+func NewPostgresWith(conn *ConnectionInfo) *gorm.DB {
+	return NewPostgres(conn.DSN(), conn.ConnectionPool)
 }
 
 func NewPostgres(dsn string, pool *ConnectionPool) *gorm.DB {

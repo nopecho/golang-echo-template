@@ -1,13 +1,13 @@
 package datasource
 
 import (
-	"github.com/nopecho/golang-template/test"
+	"github.com/nopecho/golang-template/test/testcontainer"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestNewPostgres(t *testing.T) {
-	container := test.NewPostgresContainer()
+	container := testcontainer.NewPostgresContainer()
 
 	t.Run("TestNewPostgres", func(t *testing.T) {
 		sut := NewPostgres(container.DSN, DefaultConnPool())

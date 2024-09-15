@@ -5,19 +5,14 @@ import (
 	"github.com/nopecho/golang-template/internal/app/api"
 	"github.com/nopecho/golang-template/internal/app/infra/database"
 	"github.com/nopecho/golang-template/internal/app/svc"
-	"github.com/nopecho/golang-template/internal/pkg/helper"
-	"github.com/nopecho/golang-template/pkg/echoserver"
-	"github.com/nopecho/golang-template/pkg/gorm/datasource"
+	"github.com/nopecho/golang-template/internal/pkg/apputil"
+	"github.com/nopecho/golang-template/internal/pkg/echoserver"
+	"github.com/nopecho/golang-template/internal/pkg/gorm/datasource"
 	"github.com/rs/zerolog/log"
-	"gorm.io/gorm"
-)
-
-var (
-	db *gorm.DB
 )
 
 func init() {
-	helper.PrettyLogging()
+	apputil.PrettyLogging()
 	err := godotenv.Load()
 	if err != nil {
 		log.Warn().Msgf("Error loading .env file: %v", err)
@@ -25,8 +20,8 @@ func init() {
 }
 
 func main() {
-	dbInfo := database.EnvConnectionInfo()
-	db = datasource.NewPostgres(dbInfo.DSN(), datasource.DefaultConnPool())
+	dbConn := datasource.DefaultConnectionInfo()
+	db := datasource.NewPostgres(dbConn.DSN(), dbConn.ConnectionPool)
 	db.AutoMigrate(&database.DomainEntity{}, &database.Domain2Entity{})
 
 	repository := database.NewDomainPostgresRepository(db)
@@ -43,5 +38,5 @@ func main() {
 	handler2.Register(router)
 	handler2.Route(server)
 
-	echoserver.Run(server, helper.EnvPort())
+	echoserver.Run(server, apputil.EnvPort())
 }

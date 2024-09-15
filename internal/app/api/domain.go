@@ -4,7 +4,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/nopecho/golang-template/internal/app/svc"
 	"github.com/nopecho/golang-template/internal/app/svc/cmd"
-	"github.com/nopecho/golang-template/pkg/echoserver"
+	echoserver2 "github.com/nopecho/golang-template/internal/pkg/echoserver"
 )
 
 type DomainRouter struct {
@@ -26,32 +26,32 @@ func (h *DomainRouter) route(g *echo.Group) {
 func (h *DomainRouter) get(c echo.Context) error {
 	var param GetParams
 	if err := c.Bind(&param); err != nil {
-		return echoserver.BadRequest(c, "Bad Request")
+		return echoserver2.BadRequest(c, "Bad Request")
 	}
 
 	data, err := h.svc.GetById(param.ID)
 	if err != nil {
-		return echoserver.NotFound(c, "Not Found")
+		return echoserver2.NotFound(c, "Not Found")
 	}
-	return echoserver.OK(c, data)
+	return echoserver2.OK(c, data)
 }
 
 func (h *DomainRouter) create(c echo.Context) error {
 	var body CreateRequest
 	if err := c.Bind(&body); err != nil {
-		return echoserver.BadRequest(c, "Bad Request")
+		return echoserver2.BadRequest(c, "Bad Request")
 	}
 
 	domain, _ := h.svc.Create(cmd.DomainCreateCommand{
 		Name: body.Name,
 	})
-	return echoserver.OK(c, domain)
+	return echoserver2.OK(c, domain)
 }
 
 func (h *DomainRouter) update(c echo.Context) error {
 	var body UpdateRequest
 	if err := c.Bind(&body); err != nil {
-		return echoserver.BadRequest(c, "Bad Request")
+		return echoserver2.BadRequest(c, "Bad Request")
 	}
 
 	updated, err := h.svc.Update(cmd.DomainUpdateCommand{
@@ -59,8 +59,8 @@ func (h *DomainRouter) update(c echo.Context) error {
 		Name: body.Name,
 	})
 	if err != nil {
-		return echoserver.NotFound(c, "Not Found")
+		return echoserver2.NotFound(c, "Not Found")
 	}
 
-	return echoserver.OK(c, updated)
+	return echoserver2.OK(c, updated)
 }

@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/labstack/echo/v4"
-	"github.com/nopecho/golang-template/internal/pkg/helper"
-	"github.com/nopecho/golang-template/pkg/echoserver"
-	"github.com/nopecho/golang-template/pkg/synk"
+	"github.com/nopecho/golang-template/internal/pkg/apputil"
+	"github.com/nopecho/golang-template/internal/pkg/echoserver"
+	"github.com/nopecho/golang-template/internal/pkg/synk"
 	"math/rand"
 	"net/http"
 	"strconv"
@@ -49,5 +49,5 @@ func main() {
 		}
 	})
 
-	echoserver.Run(e, helper.EnvPort())
+	echoserver.Run(e, apputil.EnvPort())
 }

@@ -2,14 +2,14 @@ package database
 
 import (
 	"github.com/nopecho/golang-template/internal/app/domain"
-	"github.com/nopecho/golang-template/pkg/gorm/datasource"
-	"github.com/nopecho/golang-template/test"
+	"github.com/nopecho/golang-template/internal/pkg/gorm/datasource"
+	"github.com/nopecho/golang-template/test/testcontainer"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 var (
-	container = test.NewPostgresContainer()
+	container = testcontainer.NewPostgresContainer()
 	db        = datasource.NewPostgres(container.DSN, nil)
 )
 
