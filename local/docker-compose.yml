@@ -135,3 +135,14 @@ services:
 #      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka1:29092,kafka2:29092,kafka3:29092
 #      KAFKA_CLUSTERS_0_METRICS_PORT: 19092
 #      DYNAMIC_CONFIG_ENABLED: 'true'
+#  nats:
+#    image: nats:2.10-alpine
+#    container_name: nats
+#    ports:
+#      - "4222:4222"
+#      - "8222:8222"
+#    command:
+#      - "-c"
+#      - "/etc/nats/nats.conf"
+#    volumes:
+#      - ./nats/nats.conf:/etc/nats/nats.conf
