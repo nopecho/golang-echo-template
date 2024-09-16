@@ -3,12 +3,18 @@
 <img alt="Go" height="" src="https://go.dev/doc/gopher/gopherbw.png" width="300"/>
 
 ## Introduction
+
+>[한국어](docs/README.kr.md)
+>
+>[English](docs/README.eng.md)
+
 Go 서버 애플리케이션 개발 시 빠르게 사용할 수 있는 [echo](https://echo.labstack.com/) 프레임워크 기반 템플릿 프로젝트 입니다.
 
 다음을 내용을 포함합니다.
 * [버전 관리](#version-management)
 * [패키지 구조](#package-layout)
 * [각종 스크립트](#getting-started)
+* [프로파일링](#profiling)
 * 샘플 코드
 
 ## Dependency
@@ -113,16 +119,59 @@ make run module=<module name>
  make test
 ```
 
-### Stress Test (with k6)
+## Profiling
+애플리케이션 프로파일링을 위한 pprof를 실행합니다.
 
-1. 스크립트 초기화
-    ```shell
-    make k6-init name=<script-name>
-    ```
+프로파일링 전 다음과 같은 사전 작업이 필요합니다.
 
-2. 스크립트 작성 📍`local/k6/script/<script-name>.js`
+### Prerequisite
+#### 1. `pprof` 설치
+```shell
+go install github.com/google/pprof@latest
+```
 
-3. 스크립트 실행
-    ```shell
-    make k6-run name=<script-name>
-    ```
+#### 2. `graphviz` 설치
+```shell
+brew install graphviz
+```
+
+#### 3. 애플리케이션 pprof 활성화
+```go
+package main
+import _ "net/http/pprof"
+
+func main() {
+	// pprof endpoint
+	go func() {
+		http.ListenAndServe("localhost:6060", nil)
+	}()
+	// ...main code
+}
+```
+
+### Run
+pprof
+```shell
+make pprof source=<pprof endpoint>
+# e.g
+# make pprof source=http://localhost:6060/debug/pprof/heap
+```
+
+heap memory 프로파일링
+```shell
+make pprof-heap
+```
+
+goroutine 프로파일링
+```shell
+make pprof-goroutine
+```
+
+cpu 프로파일링
+```shell
+make pprof-cpu
+```
+
+위 명령어 실행 시 브라우저가 열리며 pprof 결과를 확인할 수 있습니다. (기본 url: `localhost:9999`)
+
+pprof 결과는 `$HOME/pprof` 디렉토리에 저장됩니다.

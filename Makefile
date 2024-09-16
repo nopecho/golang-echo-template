@@ -61,6 +61,27 @@ clean:
 load:
 	go mod download
 
+.PHONY: pprof
+pprof:
+ifdef source
+	@pprof -http=localhost:9999 $(source)
+else
+	@echo "Usage: make pprof source=<source> (e.g. http://localhost:6060/debug/pprof/heap)"
+	@exit 1
+endif
+
+.PHONY: pprof-cpu
+pprof-cpu:
+	@pprof -http=localhost:9999 http://localhost:6060/debug/pprof/profile
+
+.PHONY: pprof-heap
+pprof-heap:
+	@pprof -http=localhost:9999 http://localhost:6060/debug/pprof/heap
+
+.PHONY: pprof-go
+pprof-go:
+	@pprof -http=localhost:9999 http://localhost:6060/debug/pprof/goroutine
+
 .PHONY: build
 build:
 ifdef module
