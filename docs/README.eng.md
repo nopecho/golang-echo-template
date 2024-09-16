@@ -79,7 +79,7 @@ asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
 │  │   ├── domain
 │  │   ├── infra
 │  │   └── svc
-│  └── pkg
+│  └── utils
 ├─ examples
 └─ local
 ```
@@ -89,7 +89,7 @@ The package structure follows the [Standard Go Project Layout](https://github.co
 
 * `internal`: Contains the application's internal packages.
     * `app`: This package holds the core logic of the application.
-    * `pkg`: These are packages that can be used across various parts of the application.
+    * `utils`: These are packages that can be used across various parts of the application.
 
 * `local`: Contains scripts and configuration files for local development.
 
