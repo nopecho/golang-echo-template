@@ -1,4 +1,4 @@
-package echoserver
+package echoutils
 
 import (
 	"encoding/csv"

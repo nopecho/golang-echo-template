@@ -2,7 +2,7 @@ package datasource
 
 import (
 	"fmt"
-	"github.com/nopecho/golang-template/internal/pkg/apputil"
+	"github.com/nopecho/golang-template/internal/utils/chore"
 	"time"
 )
 
@@ -31,11 +31,11 @@ type ConnectionInfo struct {
 
 func DefaultConnectionInfo() *ConnectionInfo {
 	return &ConnectionInfo{
-		Host:           apputil.GetDefaultEnv("DB_HOST", "localhost"),
-		Port:           apputil.GetDefaultEnv("DB_PORT", "5454"),
-		Database:       apputil.GetDefaultEnv("DB_DATABASE", "local"),
-		Username:       apputil.GetDefaultEnv("DB_USERNAME", "local"),
-		Password:       apputil.GetDefaultEnv("DB_PASSWORD", "local"),
+		Host:           chore.GetDefaultEnv("DB_HOST", "localhost"),
+		Port:           chore.GetDefaultEnv("DB_PORT", "5454"),
+		Database:       chore.GetDefaultEnv("DB_DATABASE", "local"),
+		Username:       chore.GetDefaultEnv("DB_USERNAME", "local"),
+		Password:       chore.GetDefaultEnv("DB_PASSWORD", "local"),
 		ConnectionPool: DefaultConnPool(),
 	}
 }

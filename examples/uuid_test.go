@@ -2,7 +2,7 @@ package examples
 
 import (
 	"github.com/google/uuid"
-	"github.com/nopecho/golang-template/internal/pkg/synk"
+	"github.com/nopecho/golang-template/internal/utils/synk"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

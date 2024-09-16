@@ -3,7 +3,7 @@ package e2e
 import (
 	"github.com/goccy/go-json"
 	"github.com/nopecho/golang-template/internal/app/infra/database"
-	"github.com/nopecho/golang-template/internal/pkg/gorm/datasource"
+	"github.com/nopecho/golang-template/internal/utils/gorm/datasource"
 	"github.com/nopecho/golang-template/test/testcontainer"
 	"github.com/stretchr/testify/assert"
 	"gorm.io/gorm"

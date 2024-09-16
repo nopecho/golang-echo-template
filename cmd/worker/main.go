@@ -1,16 +1,16 @@
 package main
 
 import (
-	"github.com/nopecho/golang-template/internal/pkg/apputil"
-	"github.com/nopecho/golang-template/internal/pkg/echoserver"
+	"github.com/nopecho/golang-template/internal/utils/chore"
+	"github.com/nopecho/golang-template/internal/utils/echoutils"
 	"github.com/rs/zerolog/log"
 	"time"
 )
 
 func main() {
 	go scheduling()
-	e := echoserver.NewEcho()
-	echoserver.Run(e, apputil.EnvPort())
+	e := echoutils.NewEcho()
+	echoutils.Run(e, chore.EnvPort())
 }
 
 func scheduling() {
