@@ -3,9 +3,7 @@
 
 ## Introduction
 
->[한국어](docs/README.kr.md)
->
->[English](docs/README.eng.md)
+>[한국어](README.kr.md)
 
 This is a template project for building Go server applications using the [echo](https://echo.labstack.com/) framework.
 

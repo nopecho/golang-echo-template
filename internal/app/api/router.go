@@ -5,8 +5,6 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-const prefix = "/api"
-
 // Router is an interface for echo routing
 type Router interface {
 	Route(e *echo.Echo)
@@ -23,6 +21,8 @@ type Handler struct {
 	Version string
 	Routers []GroupRouter
 }
+
+const prefix = "/api"
 
 func NewHandler(version string) *Handler {
 	return &Handler{

@@ -25,7 +25,7 @@ func main() {
 	db.AutoMigrate(&database.DomainEntity{}, &database.Domain2Entity{})
 
 	repository := database.NewDomainPostgresRepository(db)
-	service := svc.NewDomainService(repository, nil)
+	service := svc.NewDomainService(repository)
 	router := api.NewDomainRouter(service)
 
 	server := echoutils.NewEcho()

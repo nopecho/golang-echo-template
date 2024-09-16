@@ -3,7 +3,6 @@ package testcontainer
 import (
 	"context"
 	"fmt"
-	"github.com/nopecho/golang-template/test/testdata"
 	"github.com/rs/zerolog/log"
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/modules/postgres"
@@ -28,7 +27,6 @@ func NewPostgresContainer() *PostgresContainer {
 	ctx := context.Background()
 	postgresContainer, err := postgres.Run(ctx,
 		postgresImage,
-		postgres.WithInitScripts(testdata.Postgres),
 		postgres.WithDatabase(username),
 		postgres.WithUsername(password),
 		postgres.WithPassword(database),

@@ -3,7 +3,6 @@ package api
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/nopecho/golang-template/internal/app/svc"
-	"github.com/nopecho/golang-template/internal/app/svc/cmd"
 	"github.com/nopecho/golang-template/internal/utils/echoutils"
 )
 
@@ -42,7 +41,7 @@ func (h *DomainRouter) create(c echo.Context) error {
 		return echoutils.BadRequest(c, "Bad Request")
 	}
 
-	domain, _ := h.svc.Create(cmd.DomainCreateCommand{
+	domain, _ := h.svc.Create(&svc.DomainCreateCommand{
 		Name: body.Name,
 	})
 	return echoutils.OK(c, domain)
@@ -54,7 +53,7 @@ func (h *DomainRouter) update(c echo.Context) error {
 		return echoutils.BadRequest(c, "Bad Request")
 	}
 
-	updated, err := h.svc.Update(cmd.DomainUpdateCommand{
+	updated, err := h.svc.Update(&svc.DomainUpdateCommand{
 		ID:   body.ID,
 		Name: body.Name,
 	})

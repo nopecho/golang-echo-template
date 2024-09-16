@@ -4,9 +4,7 @@
 
 ## Introduction
 
->[한국어](docs/README.kr.md)
->
->[English](docs/README.eng.md)
+>[English](README.md)
 
 Go 서버 애플리케이션 개발 시 빠르게 사용할 수 있는 [echo](https://echo.labstack.com/) 프레임워크 기반 템플릿 프로젝트 입니다.
 
