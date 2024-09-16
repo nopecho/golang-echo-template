@@ -77,9 +77,7 @@ asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
 │  │   ├── domain
 │  │   ├── infra
 │  │   └── svc
-│  └── utils
-├─ examples
-└─ local
+└─ └── utils
 ```
 The package structure follows the [Standard Go Project Layout](https://github.com/golang-standards/project-layout).
 
