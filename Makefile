@@ -116,6 +116,6 @@ run: up
 ifdef module
 	go run $(BUILD_PATH)/$(module)/main.go
 else
-	@echo "Usage: make run module=<module name>! starting default web server"
-	go run $(BUILD_PATH)/web/main.go
+	@echo "Usage: make run module=<module name>! starting default api server"
+	go run $(BUILD_PATH)/api/main.go
 endif
