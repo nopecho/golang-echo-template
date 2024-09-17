@@ -1,12 +1,12 @@
 package domain
 
-type Domain struct {
+type AnyModel struct {
 	ID   uint64 `json:"id"`
 	Name string `json:"name"`
 }
 
-func NewDomain(name string) *Domain {
-	return &Domain{
+func NewAnyModel(name string) *AnyModel {
+	return &AnyModel{
 		Name: name,
 	}
 }

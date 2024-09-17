@@ -20,12 +20,12 @@ var (
 )
 
 func TestGorm(t *testing.T) {
-	datasource.AutoMigrate(db1, &database.DomainEntity{})
-	datasource.AutoMigrate(db2, &database.Domain2Entity{})
+	datasource.AutoMigrate(db1, &database.AnyEntity{})
+	datasource.AutoMigrate(db2, &database.Any2Entity{})
 
 	t.Run("save test", func(t *testing.T) {
 		err := db2.Transaction(func(tx *gorm.DB) error {
-			tx.Create(&database.Domain2Entity{
+			tx.Create(&database.Any2Entity{
 				Payload: map[string]interface{}{
 					"save": "test",
 				},
@@ -36,7 +36,7 @@ func TestGorm(t *testing.T) {
 			t.Log(err)
 		}
 
-		var actual []database.Domain2Entity
+		var actual []database.Any2Entity
 		db2.Find(&actual)
 		str, _ := json.Marshal(actual)
 		t.Log(string(str))
@@ -65,7 +65,7 @@ func TestGorm(t *testing.T) {
 		for i := range size {
 			go func() {
 				defer wg.Done()
-				db2.Create(&database.Domain2Entity{
+				db2.Create(&database.Any2Entity{
 					Payload: database.Jsonb{
 						"batch": i,
 					},
@@ -75,15 +75,15 @@ func TestGorm(t *testing.T) {
 		wg.Wait()
 
 		var count int64
-		db2.Model(&database.Domain2Entity{}).Count(&count)
+		db2.Model(&database.Any2Entity{}).Count(&count)
 
 		assert.Equal(t, int64(size), count)
 
 		t.Cleanup(func() {
-			db2.Where("1=1").Delete(&database.Domain2Entity{})
+			db2.Where("1=1").Delete(&database.Any2Entity{})
 
 			var deleted int64
-			db2.Model(&database.Domain2Entity{}).Count(&deleted)
+			db2.Model(&database.Any2Entity{}).Count(&deleted)
 
 			assert.Equal(t, int64(0), deleted)
 		})
@@ -91,23 +91,23 @@ func TestGorm(t *testing.T) {
 
 	t.Run("batch insert test", func(t *testing.T) {
 		size := 1000
-		entities := make([]database.DomainEntity, size)
+		entities := make([]database.AnyEntity, size)
 		for i := range size {
-			entities[i] = database.DomainEntity{}
+			entities[i] = database.AnyEntity{}
 		}
 
 		db1.CreateInBatches(entities, 100)
 
 		var count int64
-		db1.Model(&database.DomainEntity{}).Count(&count)
+		db1.Model(&database.AnyEntity{}).Count(&count)
 
 		assert.Equal(t, int64(size), count)
 
 		t.Cleanup(func() {
-			db1.Where("1=1").Delete(&database.DomainEntity{})
+			db1.Where("1=1").Delete(&database.AnyEntity{})
 
 			var deleted int64
-			db1.Model(&database.DomainEntity{}).Count(&deleted)
+			db1.Model(&database.AnyEntity{}).Count(&deleted)
 
 			assert.Equal(t, int64(0), deleted)
 		})

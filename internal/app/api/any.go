@@ -2,58 +2,58 @@ package api
 
 import (
 	"github.com/labstack/echo/v4"
-	"github.com/nopecho/golang-template/internal/app/svc"
+	"github.com/nopecho/golang-template/internal/app/domain"
 	echoutil "github.com/nopecho/golang-template/internal/util/echo"
 )
 
-type DomainRouter struct {
-	svc *svc.DomainService
+type AnyRouter struct {
+	svc *domain.AnyService
 }
 
-func NewDomainRouter(service *svc.DomainService) *DomainRouter {
-	return &DomainRouter{
+func NewAnyRouter(service *domain.AnyService) *AnyRouter {
+	return &AnyRouter{
 		svc: service,
 	}
 }
 
-func (h *DomainRouter) route(g *echo.Group) {
-	g.GET("/domain/:id", h.get)
-	g.POST("/domain", h.create)
-	g.PATCH("/domain/:id", h.update)
+func (r *AnyRouter) route(g *echo.Group) {
+	g.GET("/domain/:id", r.get)
+	g.POST("/domain", r.create)
+	g.PATCH("/domain/:id", r.update)
 }
 
-func (h *DomainRouter) get(c echo.Context) error {
+func (r *AnyRouter) get(c echo.Context) error {
 	var param GetParams
 	if err := c.Bind(&param); err != nil {
 		return echoutil.BadRequest(c, "Bad Request")
 	}
 
-	data, err := h.svc.GetById(param.ID)
+	data, err := r.svc.GetById(param.ID)
 	if err != nil {
 		return echoutil.NotFound(c, "Not Found")
 	}
 	return echoutil.OK(c, data)
 }
 
-func (h *DomainRouter) create(c echo.Context) error {
+func (r *AnyRouter) create(c echo.Context) error {
 	var body CreateRequest
 	if err := c.Bind(&body); err != nil {
 		return echoutil.BadRequest(c, "Bad Request")
 	}
 
-	domain, _ := h.svc.Create(&svc.DomainCreateCommand{
+	domain, _ := r.svc.Create(&domain.AnyCreateCommand{
 		Name: body.Name,
 	})
 	return echoutil.OK(c, domain)
 }
 
-func (h *DomainRouter) update(c echo.Context) error {
+func (r *AnyRouter) update(c echo.Context) error {
 	var body UpdateRequest
 	if err := c.Bind(&body); err != nil {
 		return echoutil.BadRequest(c, "Bad Request")
 	}
 
-	updated, err := h.svc.Update(&svc.DomainUpdateCommand{
+	updated, err := r.svc.Update(&domain.AnyUpdateCommand{
 		ID:   body.ID,
 		Name: body.Name,
 	})

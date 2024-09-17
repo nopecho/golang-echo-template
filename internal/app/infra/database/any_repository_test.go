@@ -14,13 +14,13 @@ var (
 )
 
 func TestDomainRepository(t *testing.T) {
-	_ = db.AutoMigrate(&DomainEntity{})
-	sut := NewDomainPostgresRepository(db)
+	_ = db.AutoMigrate(&AnyEntity{})
+	sut := NewAnyGormRepository(db)
 
 	t.Run("FindAll", func(t *testing.T) {
-		_, _ = sut.Save(domain.NewDomain("1"))
-		_, _ = sut.Save(domain.NewDomain("2"))
-		_, _ = sut.Save(domain.NewDomain("3"))
+		_, _ = sut.Save(domain.NewAnyModel("1"))
+		_, _ = sut.Save(domain.NewAnyModel("2"))
+		_, _ = sut.Save(domain.NewAnyModel("3"))
 
 		actual, _ := sut.FindAll()
 

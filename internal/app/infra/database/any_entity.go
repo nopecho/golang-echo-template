@@ -5,16 +5,16 @@ import (
 	"strconv"
 )
 
-type DomainEntity struct {
+type AnyEntity struct {
 	BaseModel
 }
 
-func (DomainEntity) TableName() string {
+func (AnyEntity) TableName() string {
 	return "domain"
 }
 
-func (e *DomainEntity) Domain() *domain.Domain {
-	return &domain.Domain{
+func (e *AnyEntity) Domain() *domain.AnyModel {
+	return &domain.AnyModel{
 		ID:   e.ID,
 		Name: strconv.FormatUint(e.ID, 10),
 	}

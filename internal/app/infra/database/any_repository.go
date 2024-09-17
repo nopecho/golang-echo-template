@@ -5,31 +5,31 @@ import (
 	"gorm.io/gorm"
 )
 
-type DomainPostgresRepository struct {
+type AnyGormRepository struct {
 	db *gorm.DB
 }
 
-func NewDomainPostgresRepository(db *gorm.DB) *DomainPostgresRepository {
-	return &DomainPostgresRepository{
+func NewAnyGormRepository(db *gorm.DB) *AnyGormRepository {
+	return &AnyGormRepository{
 		db: db,
 	}
 }
 
-func (r *DomainPostgresRepository) FindAll() ([]*domain.Domain, error) {
-	var entities []DomainEntity
+func (r *AnyGormRepository) FindAll() ([]*domain.AnyModel, error) {
+	var entities []AnyEntity
 	if err := r.db.Find(&entities).Error; err != nil {
-		return []*domain.Domain{}, err
+		return []*domain.AnyModel{}, err
 	}
 
-	var domains []*domain.Domain
+	var domains []*domain.AnyModel
 	for _, e := range entities {
 		domains = append(domains, e.Domain())
 	}
 	return domains, nil
 }
 
-func (r *DomainPostgresRepository) FindById(id uint64) (*domain.Domain, error) {
-	var entity DomainEntity
+func (r *AnyGormRepository) FindById(id uint64) (*domain.AnyModel, error) {
+	var entity AnyEntity
 	if err := r.db.First(&entity, id).Error; err != nil {
 		return nil, err
 	}
@@ -37,8 +37,8 @@ func (r *DomainPostgresRepository) FindById(id uint64) (*domain.Domain, error) {
 	return entity.Domain(), nil
 }
 
-func (r *DomainPostgresRepository) Save(domain *domain.Domain) (*domain.Domain, error) {
-	entity := DomainEntity{
+func (r *AnyGormRepository) Save(domain *domain.AnyModel) (*domain.AnyModel, error) {
+	entity := AnyEntity{
 		BaseModel: BaseModel{
 			ID: domain.ID,
 		},
