@@ -3,7 +3,7 @@ package api
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/nopecho/golang-template/internal/app/svc"
-	"github.com/nopecho/golang-template/internal/utils/echoutils"
+	echoutil "github.com/nopecho/golang-template/internal/util/echo"
 )
 
 type DomainRouter struct {
@@ -25,32 +25,32 @@ func (h *DomainRouter) route(g *echo.Group) {
 func (h *DomainRouter) get(c echo.Context) error {
 	var param GetParams
 	if err := c.Bind(&param); err != nil {
-		return echoutils.BadRequest(c, "Bad Request")
+		return echoutil.BadRequest(c, "Bad Request")
 	}
 
 	data, err := h.svc.GetById(param.ID)
 	if err != nil {
-		return echoutils.NotFound(c, "Not Found")
+		return echoutil.NotFound(c, "Not Found")
 	}
-	return echoutils.OK(c, data)
+	return echoutil.OK(c, data)
 }
 
 func (h *DomainRouter) create(c echo.Context) error {
 	var body CreateRequest
 	if err := c.Bind(&body); err != nil {
-		return echoutils.BadRequest(c, "Bad Request")
+		return echoutil.BadRequest(c, "Bad Request")
 	}
 
 	domain, _ := h.svc.Create(&svc.DomainCreateCommand{
 		Name: body.Name,
 	})
-	return echoutils.OK(c, domain)
+	return echoutil.OK(c, domain)
 }
 
 func (h *DomainRouter) update(c echo.Context) error {
 	var body UpdateRequest
 	if err := c.Bind(&body); err != nil {
-		return echoutils.BadRequest(c, "Bad Request")
+		return echoutil.BadRequest(c, "Bad Request")
 	}
 
 	updated, err := h.svc.Update(&svc.DomainUpdateCommand{
@@ -58,8 +58,8 @@ func (h *DomainRouter) update(c echo.Context) error {
 		Name: body.Name,
 	})
 	if err != nil {
-		return echoutils.NotFound(c, "Not Found")
+		return echoutil.NotFound(c, "Not Found")
 	}
 
-	return echoutils.OK(c, updated)
+	return echoutil.OK(c, updated)
 }

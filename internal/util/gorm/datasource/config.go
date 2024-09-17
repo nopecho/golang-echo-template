@@ -2,7 +2,7 @@ package datasource
 
 import (
 	"fmt"
-	"github.com/nopecho/golang-template/internal/utils/chore"
+	"github.com/nopecho/golang-template/internal/util/chore"
 	"time"
 )
 

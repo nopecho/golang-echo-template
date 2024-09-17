@@ -5,9 +5,9 @@ import (
 	"github.com/nopecho/golang-template/internal/app/api"
 	"github.com/nopecho/golang-template/internal/app/infra/database"
 	"github.com/nopecho/golang-template/internal/app/svc"
-	"github.com/nopecho/golang-template/internal/utils/chore"
-	"github.com/nopecho/golang-template/internal/utils/echoutils"
-	"github.com/nopecho/golang-template/internal/utils/gorm/datasource"
+	"github.com/nopecho/golang-template/internal/util/chore"
+	"github.com/nopecho/golang-template/internal/util/echo"
+	"github.com/nopecho/golang-template/internal/util/gorm/datasource"
 	"github.com/rs/zerolog/log"
 )
 
@@ -28,7 +28,7 @@ func main() {
 	service := svc.NewDomainService(repository)
 	router := api.NewDomainRouter(service)
 
-	server := echoutils.NewEcho()
+	server := echo.NewEcho()
 
 	handler := api.NewHandler("v1")
 	handler.Register(router, router, router, router)
@@ -38,5 +38,5 @@ func main() {
 	handler2.Register(router)
 	handler2.Route(server)
 
-	echoutils.Run(server, chore.EnvPort())
+	echo.Run(server, chore.EnvPort())
 }

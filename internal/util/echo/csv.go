@@ -1,4 +1,4 @@
-package echoutils
+package echo
 
 import (
 	"encoding/csv"
