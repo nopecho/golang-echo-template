@@ -1,22 +1,19 @@
 package main
 
 import (
-	"github.com/joho/godotenv"
+	_ "github.com/joho/godotenv/autoload"
 	"github.com/nopecho/golang-template/internal/app/api"
 	"github.com/nopecho/golang-template/internal/app/domain"
 	"github.com/nopecho/golang-template/internal/app/infra/database"
-	"github.com/nopecho/golang-template/internal/util/chore"
+	"github.com/nopecho/golang-template/internal/util/common"
 	"github.com/nopecho/golang-template/internal/util/echo"
 	"github.com/nopecho/golang-template/internal/util/gorm/datasource"
-	"github.com/rs/zerolog/log"
+	"github.com/nopecho/golang-template/internal/util/http"
 )
 
 func init() {
-	chore.PrettyLogging()
-	err := godotenv.Load()
-	if err != nil {
-		log.Warn().Msgf("Error loading .env file: %v", err)
-	}
+	common.PrettyLogging()
+	go http.ListenPprof()
 }
 
 func main() {
@@ -38,5 +35,5 @@ func main() {
 	handler2.Register(router)
 	handler2.Route(server)
 
-	echo.Run(server, chore.EnvPort())
+	echo.Run(server, common.EnvPort())
 }

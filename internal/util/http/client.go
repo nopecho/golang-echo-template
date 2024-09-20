@@ -136,13 +136,8 @@ func (c *Client) parseResponse(resp *http.Response) (map[string]interface{}, err
 	if resp.StatusCode == 204 {
 		return nil, nil
 	}
-	res, err := io.ReadAll(resp.Body)
-	if err != nil {
-		log.Err(err)
-		return nil, err
-	}
 	var response map[string]interface{}
-	err = json.Unmarshal(res, &response)
+	err := json.NewDecoder(resp.Body).Decode(&response)
 	if err != nil {
 		log.Err(err)
 		return nil, err
