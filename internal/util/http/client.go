@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-type ANY map[string]any
+type MAP map[string]any
 
 type Client struct {
 	host   string

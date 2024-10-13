@@ -5,6 +5,9 @@ import (
 	"net/http"
 )
 
+// MAP is a type alias for map[string]any
+type MAP map[string]any
+
 type Meta struct {
 	Page       int  `json:"page"`
 	Size       int  `json:"size"`

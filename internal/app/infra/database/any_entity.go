@@ -16,6 +16,6 @@ func (AnyEntity) TableName() string {
 func (e *AnyEntity) Domain() *domain.AnyModel {
 	return &domain.AnyModel{
 		ID:   e.ID,
-		Name: strconv.FormatUint(e.ID, 10),
+		Name: strconv.FormatUint(uint64(e.ID), 10),
 	}
 }

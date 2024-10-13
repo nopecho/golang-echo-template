@@ -28,7 +28,7 @@ func TestHttpClient(t *testing.T) {
 	})
 
 	t.Run("PostJson", func(t *testing.T) {
-		data := ANY{
+		data := MAP{
 			"title":  "foo",
 			"body":   "bar",
 			"userId": 1,
@@ -42,7 +42,7 @@ func TestHttpClient(t *testing.T) {
 	})
 
 	t.Run("PatchJson", func(t *testing.T) {
-		data := ANY{
+		data := MAP{
 			"title": "bar",
 		}
 		res, _ := sut.PatchJson("/posts/1", data)

@@ -5,39 +5,43 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// Router is an interface for echo routing
-type Router interface {
-	Route(e *echo.Echo)
+// EchoRouter is an interface for echo routing
+type EchoRouter interface {
+	Routing(e *echo.Echo)
 }
 
-// GroupRouter is an interface for echo versioned routing
-type GroupRouter interface {
-	route(e *echo.Group)
+// Router is an interface for echo versioned routing
+type Router interface {
+	Route(e *echo.Group)
 }
 
 // Handler is a struct for handling echo routing with versioning
-// Version is the version of the API prefix (e.g. v1 -> route: /api/v1/~)
+// Version is the version of the API prefix (e.g. v1 -> Route: /api/v1/~)
 type Handler struct {
 	Version string
-	Routers []GroupRouter
+	Routers []Router
 }
 
 const prefix = "/api"
 
-func NewHandler(version string) *Handler {
+func NewVersionHandler(version string) *Handler {
 	return &Handler{
 		Version: version,
 	}
 }
 
-func (h *Handler) Register(gr ...GroupRouter) {
-	h.Routers = append(h.Routers, gr...)
+func NewHandler() *Handler {
+	return NewVersionHandler("")
 }
 
-func (h *Handler) Route(e *echo.Echo) {
+func (h *Handler) Register(r ...Router) {
+	h.Routers = append(h.Routers, r...)
+}
+
+func (h *Handler) Routing(e *echo.Echo) {
 	group := e.Group(h.versioning())
-	for _, vr := range h.Routers {
-		vr.route(group)
+	for _, r := range h.Routers {
+		r.Route(group)
 	}
 }
 

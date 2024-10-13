@@ -1,7 +1,7 @@
 package domain
 
 type AnyModel struct {
-	ID   uint64 `json:"id"`
+	ID   uint   `json:"id"`
 	Name string `json:"name"`
 }
 

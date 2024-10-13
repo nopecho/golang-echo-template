@@ -16,7 +16,7 @@ func NewAnyRouter(service *domain.AnyService) *AnyRouter {
 	}
 }
 
-func (r *AnyRouter) route(g *echo.Group) {
+func (r *AnyRouter) Route(g *echo.Group) {
 	g.GET("/domain/:id", r.get)
 	g.POST("/domain", r.create)
 	g.PATCH("/domain/:id", r.update)

@@ -4,12 +4,12 @@ import "os"
 
 // EnvPort returns the PORT environment variable or default value
 func EnvPort() string {
-	return GetDefaultEnv("PORT", "8080")
+	return GetEnv("PORT", "8080")
 }
 
-func GetDefaultEnv(key, defaultValue string) string {
+func GetEnv(key, fallback string) string {
 	if value, ok := os.LookupEnv(key); ok {
 		return value
 	}
-	return defaultValue
+	return fallback
 }

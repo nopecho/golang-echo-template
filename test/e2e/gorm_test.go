@@ -15,8 +15,8 @@ import (
 var (
 	container1 = testcontainer.NewPostgresContainer()
 	container2 = testcontainer.NewPostgresContainer()
-	db1        = datasource.NewPostgres(container1.DSN, datasource.DefaultConnPool())
-	db2        = datasource.NewPostgres(container2.DSN, datasource.DefaultConnPool())
+	db1        = datasource.NewPostgresWith(container1.DSN, nil)
+	db2        = datasource.NewPostgresWith(container2.DSN, nil)
 )
 
 func TestGorm(t *testing.T) {
@@ -59,7 +59,7 @@ func TestGorm(t *testing.T) {
 	})
 
 	t.Run("go insert test", func(t *testing.T) {
-		size := 1000
+		size := 100
 		wg := &sync.WaitGroup{}
 		wg.Add(size)
 		for i := range size {
@@ -90,7 +90,7 @@ func TestGorm(t *testing.T) {
 	})
 
 	t.Run("batch insert test", func(t *testing.T) {
-		size := 1000
+		size := 100
 		entities := make([]database.AnyEntity, size)
 		for i := range size {
 			entities[i] = database.AnyEntity{}

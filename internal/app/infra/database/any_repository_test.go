@@ -10,7 +10,7 @@ import (
 
 var (
 	container = testcontainer.NewPostgresContainer()
-	db        = datasource.NewPostgres(container.DSN, nil)
+	db        = datasource.NewPostgresWith(container.DSN, nil)
 )
 
 func TestDomainRepository(t *testing.T) {
