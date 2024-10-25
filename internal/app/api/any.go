@@ -3,7 +3,7 @@ package api
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/nopecho/golang-template/internal/app/domain"
-	echoutil "github.com/nopecho/golang-template/internal/util/echo"
+	echoutil "github.com/nopecho/golang-template/internal/util/echoutil"
 )
 
 type AnyRouter struct {

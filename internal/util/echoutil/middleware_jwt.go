@@ -1,4 +1,4 @@
-package echo
+package echoutil
 
 import (
 	"github.com/golang-jwt/jwt/v5"

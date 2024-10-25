@@ -3,17 +3,17 @@ package main
 import (
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/nopecho/golang-template/internal/util/common"
-	"github.com/nopecho/golang-template/internal/util/echo"
-	"github.com/nopecho/golang-template/internal/util/http"
+	"github.com/nopecho/golang-template/internal/util/echoutil"
+	"github.com/nopecho/golang-template/internal/util/httputil"
 	"github.com/rs/zerolog/log"
 	"time"
 )
 
 func main() {
-	go http.ListenPprof()
+	go httputil.ListenPprof()
 	go scheduling()
-	e := echo.NewEcho()
-	echo.Run(e, common.EnvPort())
+	e := echoutil.NewEcho()
+	echoutil.Run(e, common.EnvPort())
 }
 
 func scheduling() {

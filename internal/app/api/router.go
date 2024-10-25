@@ -30,7 +30,7 @@ func NewVersionHandler(version string) *Handler {
 	}
 }
 
-func NewHandler() *Handler {
+func NewRootHandler() *Handler {
 	return NewVersionHandler("")
 }
 

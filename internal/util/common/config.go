@@ -29,7 +29,7 @@ func logSystemInfo() {
 		Str("GOOS", runtime.GOOS).
 		Int("NUM_CPU", runtime.NumCPU()).
 		Int("GOMAXPROCS", runtime.GOMAXPROCS(0)).
-		Msg("runtime")
+		Msg("SYSTEM")
 }
 
 func prettyLogging() {

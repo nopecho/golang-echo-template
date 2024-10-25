@@ -2,7 +2,7 @@ package database
 
 import (
 	"github.com/nopecho/golang-template/internal/app/domain"
-	"github.com/nopecho/golang-template/internal/util/gorm/datasource"
+	"github.com/nopecho/golang-template/internal/util/gormutil/datasource"
 	"github.com/nopecho/golang-template/test/testcontainer"
 	"github.com/stretchr/testify/assert"
 	"testing"
