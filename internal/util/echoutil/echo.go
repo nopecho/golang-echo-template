@@ -20,11 +20,11 @@ func NewEcho() (e *echo.Echo) {
 }
 
 // Run starts the echo server with graceful shutdown
-func Run(e *echo.Echo, port string) {
-	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, os.Kill, syscall.SIGTERM)
+func Run(ctx context.Context, e *echo.Echo, port string) {
+	stopCtx, stop := signal.NotifyContext(ctx, os.Interrupt, os.Kill, syscall.SIGTERM)
 	defer stop()
 	go startServer(e, port)
-	<-ctx.Done()
+	<-stopCtx.Done()
 	stopServer(e)
 }
 

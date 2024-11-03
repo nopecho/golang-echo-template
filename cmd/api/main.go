@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/nopecho/golang-template/internal/app/api"
 	"github.com/nopecho/golang-template/internal/app/domain"
@@ -33,5 +34,6 @@ func main() {
 	handler.Routing(server)
 	handler2.Routing(server)
 
-	echoutil.Run(server, common.EnvPort())
+	ctx := context.Background()
+	echoutil.Run(ctx, server, common.EnvPort())
 }
