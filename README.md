@@ -74,9 +74,7 @@ asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
 │  │   ├── api
 │  │   ├── domain
 │  │   ├── infra
-│  │   └── svc
-│  └── utils
-├─ examples
+│  └── util
 └─ local
 ```
 패키지 구조는 [Standard Go Project Layout](https://github.com/golang-standards/project-layout)을 따릅니다.
@@ -85,7 +83,7 @@ asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
 
 * `internal`: 애플리케이션의 내부 패키지입니다.
   * `app`: 애플리케이션의 핵심 로직이 포함된 패키지입니다.
-  * `utils`: 애플리케이션의 여러 부분에서 사용할 수 있는 패키지입니다.
+  * `util`: 애플리케이션의 여러 부분에서 사용할 수 있는 패키지입니다.
 
 * `local`: 로컬 개발을 위한 스크립트 및 설정 파일이 존재하는 패키지입니다.
 
